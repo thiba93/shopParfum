@@ -1,18 +1,24 @@
-import com.votreentreprise.applicationparfum.model.Parfum;
-import com.votreentreprise.applicationparfum.repository.ParfumRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class ParfumService {
     @Autowired
     private ParfumRepository parfumRepository;
 
-    public List<Parfum> getAllParfums() {
-        return parfumRepository.findAll();
+    public Parfum createParfum(Parfum parfum) {
+        return parfumRepository.save(parfum);
     }
 
-    // Ajoutez d'autres méthodes pour gérer les parfums
+    public Parfum updateParfum(Long id, Parfum parfumDetails) {
+        Parfum parfum = parfumRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Parfum not found"));
+        parfum.setTitre(parfumDetails.getTitre());
+        parfum.setDescription(parfumDetails.getDescription());
+        parfum.setMiniDescription(parfumDetails.getMiniDescription());
+        parfum.setPrix(parfumDetails.getPrix());
+        parfum.setPhotos(parfumDetails.getPhotos());
+        return parfumRepository.save(parfum);
+    }
+
+    public void deleteParfum(Long id) {
+        Parfum parfum = parfumRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Parfum not found"));
+        parfumRepository.delete(parfum);
+    }
 }

@@ -17,6 +17,24 @@ public class ParfumController {
     public List<Parfum> getAllParfums() {
         return parfumService.getAllParfums();
     }
+    @PostMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Parfum createParfum(@RequestBody Parfum parfum) {
+        return parfumService.createParfum(parfum);
+    }
+
+    @PutMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Parfum updateParfum(@PathVariable Long id, @RequestBody Parfum parfumDetails) {
+        return parfumService.updateParfum(id, parfumDetails);
+    }
+
+    @DeleteMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteParfum(@PathVariable Long id) {
+        parfumService.deleteParfum(id);
+        return ResponseEntity.ok().build();
+    }
 
     // Ajoutez d'autres endpoints pour gérer les parfums
 }

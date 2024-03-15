@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Parfums</title>
+</head>
+<body>
+<h1>Manage Parfums</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Actions</th>
+    </tr>
+    <!-- Sample Row (Loop through parfums in your application) -->
+    <tr>
+        <td>Parfum XYZ</td>
+        <td>
+            <a th:href="@{/admin/edit/{id}(id=${parfum.id})}">Edit</a>
+            <a th:href="@{/api/parfums/admin/{id}(id=${parfum.id})}" th:method="delete">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Parfum</title>
+</head>
+<body>
+<h1>Add New Parfum</h1>
+<form th:action="@{/api/parfums/admin}" th:method="post">
+    <label for="titre">Title:</label>
+    <input type="text" id="titre" name="titre"><br><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea><br><br>
+    <label for="prix">Price:</label>
+    <input type="text" id="prix" name="prix"><br><br>
+    <label for="photos">Photos URLs (comma-separated):</label>
+    <input type="text" id="photos" name="photos"><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
