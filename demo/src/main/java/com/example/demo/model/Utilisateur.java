@@ -19,6 +19,12 @@ public class Utilisateur {
     @Column(nullable = false)
     private String telephone;
 
+    @Column(nullable = false)
+    private boolean active;
+
+    @Column(nullable = false)
+    private String roles;
+
     // Getters
     public Long getId() {
         return id;
@@ -38,6 +44,14 @@ public class Utilisateur {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public String getRoles() {
+        return roles;
     }
 
     // Setters
@@ -60,4 +74,25 @@ public class Utilisateur {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setRoles(String roles){
+        this.roles = roles ;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.stream(roles.split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return active;
+    }
+
 }
